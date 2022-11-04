@@ -1,0 +1,21 @@
+概要
+PrimaryHostAddressのpingが応答しなくなったら、セカンダリホスト(このホスト)のグローバルIPv4アドレスを取得して、CloudflareのDNSレコードを更新
+PrimaryHostAddressのpingが応答したら、PrimaryHostAddressにCloudflareのDNSレコードを更新
+
+利用シーン
+メインのアドレスは、v6ぷラス固定でサブをPPPoE動的などにする場合
+
+使い方
+このプロジェクトを/usr/local/backupv4dnsupdaterにclone
+config.sample.yamlをconfig.yamlにコピーして編集
+config.yamlのパーミッションを700に変更
+backupv4dnsupdater.serviceを/etc/systemd/system/backupv4dnsupdater.serviceへシンボリックを作成
+systemctl enable backupv4dnsupdaterを実行
+
+前提
+ubuntu22
+python3
+iputils-ping
+
+補助ツール
+dnsexploar.pyでゾーンIDやレコードIDを調べる

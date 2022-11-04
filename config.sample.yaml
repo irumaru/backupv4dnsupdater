@@ -1,0 +1,13 @@
+version: 0.9
+cloudflare: #CloudflareAPIの資格情報
+  email: ""
+  appKey: ""
+  record: #更新するDNSレコードの設定
+    zoneId: ""
+    recordId: ""
+    name: ""
+loopInterval: 10 #秒ごとにアドレス更新を確認
+primaryHostAddress: "" #プライマリホストのグローバルIPv4アドレス
+globalAddressCheck: "https://checkip.amazonaws.com" #このホストのIPv4アドレスの取得先
+onlineCheckAddress: "1.1.1.1" #インターネット接続の確認先
+logPath: "/var/log/backupv4dnsupdater" #ログの保存先
