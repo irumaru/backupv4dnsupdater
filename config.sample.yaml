@@ -10,4 +10,6 @@ loopInterval: 10 #秒ごとにアドレス更新を確認
 primaryHostAddress: "" #プライマリホストのグローバルIPv4アドレス
 globalAddressCheck: "https://checkip.amazonaws.com" #このホストのIPv4アドレスの取得先
 onlineCheckAddress: "1.1.1.1" #インターネット接続の確認先
+usePriority: false #セカンダリ優先などを使用するか
+priorityFilePath: "priority" #セカンダリを優先する場合、ファイルにSECONDARYと記述
 logPath: "/var/log/backupv4dnsupdater" #ログの保存先

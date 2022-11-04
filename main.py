@@ -4,7 +4,7 @@ import cloudflare
 import interface
 from log import logger
 
-from config import CLOUDFLARE_RECORD_ID, CLOUDFLARE_RECORD_NAME, CLOUDFLARE_ZONE_ID, PRIMARY_HOST_ADDRESS, GLOBAL_ADDRESS_CHECK, LOOP_INTERVAL, ONLINE_CHECK_ADDRESS
+from config import CLOUDFLARE_RECORD_ID, CLOUDFLARE_RECORD_NAME, CLOUDFLARE_ZONE_ID, PRIMARY_HOST_ADDRESS, LOOP_INTERVAL, ONLINE_CHECK_ADDRESS, USE_PRIORITY, PRIORITY_FILE_PATH
 
 # グローバル変数
 hostAddress = ''
@@ -20,8 +20,8 @@ def main():
 
     # ループ
     while(True):
-        # プライマリホストがオンラインか確認
-        if(interface.checkOnline(PRIMARY_HOST_ADDRESS) == 0):
+        # プライマリホストがオンラインかつセカンダリ非優先のとき
+        if(interface.checkOnline(PRIMARY_HOST_ADDRESS) == 0 and prioritySecondary() == False):
             # Primary up.
             # DNSレコードのアドレスがプライマリホストのアドレス"でない"か確認
             if(PRIMARY_HOST_ADDRESS != dnsAddress):
@@ -63,6 +63,18 @@ def updateAddress():
     # DNSの更新
     cloudflare.updateCloudflareDnsRecord(CLOUDFLARE_ZONE_ID, CLOUDFLARE_RECORD_ID, "A", CLOUDFLARE_RECORD_NAME, dnsAddress)
     logger("Successful DNS update.")
+
+
+# セカンダリを優先するかどうか
+def prioritySecondary():
+    if(USE_PRIORITY):
+        with open(PRIORITY_FILE_PATH, mode='r') as p:
+            priority = p.read().replace('\n', '')
+            if(priority == 'SECONDARY'):
+                return True
+            return False
+    return False
+    
 
 # mainを実行
 main()
