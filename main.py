@@ -20,22 +20,22 @@ def main():
 
     # ループ
     while(True):
-        # プライマリホストがオンラインかつセカンダリ非優先のとき
-        if(interface.checkOnline(PRIMARY_HOST_ADDRESS) == 0 and prioritySecondary() == False):
-            # Primary up.
-            # DNSレコードのアドレスがプライマリホストのアドレス"でない"か確認
-            if(PRIMARY_HOST_ADDRESS != dnsAddress):
-                logger('UP: Primary goes online. Switch to primary.')
-                dnsAddress = PRIMARY_HOST_ADDRESS
-                updateAddress()
-        else:
-            # Primary down.
+        # プライマリがオフライン かつ セカンダリがオンライン 又は セカンダリ優先 のとき
+        if((interface.checkOnline(PRIMARY_HOST_ADDRESS) != 0 and interface.checkOnline(ONLINE_CHECK_ADDRESS) == 0) or prioritySecondary()):
+            # Secondary up.
             # セカンダリアドレスを取得
             hostAddress = interface.getGlobalAddress()
             # DNSレコードのアドレスがセカンダリホストのアドレス"でない"か確認
             if(hostAddress != dnsAddress):
-                logger('DOWN: Primary goes offline. Switch to this secondary.')
+                logger('Switch to this secondary.')
                 dnsAddress = hostAddress
+                updateAddress()
+        else:
+            # Primary up.
+            # DNSレコードのアドレスがプライマリホストのアドレス"でない"か確認
+            if(PRIMARY_HOST_ADDRESS != dnsAddress):
+                logger('Switch to primary.')
+                dnsAddress = PRIMARY_HOST_ADDRESS
                 updateAddress()
         
         time.sleep(LOOP_INTERVAL)
