@@ -1,7 +1,10 @@
 version: 0.9
 cloudflare: #CloudflareAPIの資格情報
-  email: ""
-  appKey: ""
+  auth:
+    mode: "token" #tokenまたはaccount
+    email: "" #accountの場合必須
+    appKey: "" #accountの場合必須
+    token: "" #tokenの場合必須
   record: #更新するDNSレコードの設定
     zoneId: ""
     recordId: ""

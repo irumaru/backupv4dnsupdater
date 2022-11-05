@@ -5,7 +5,7 @@ import json
 from log import logger
 
 # Configのロード
-from config import CLOUDFLARE_GLOBAL_API_KEY, CLOUDFLARE_EMAIL
+from config import CLOUDFLARE_GLOBAL_API_KEY, CLOUDFLARE_EMAIL, CLOUDFLARE_TOKEN, CLOUDFLARE_AUTH_MODE
 
 
 # APIレスポンスの解釈に失敗
@@ -32,11 +32,7 @@ def getCloudflareDnsRecord(zone_id, record_id):
 
     uri = 'https://api.cloudflare.com/client/v4/zones/'+zone_id+'/dns_records/'+record_id
 
-    headers = {
-        'X-Auth-Email': CLOUDFLARE_EMAIL,
-        'X-Auth-Key': CLOUDFLARE_GLOBAL_API_KEY,
-        'Content-Type': 'application/json',
-    }
+    headers = getCloudflareApiHeaders()
 
     response = requests.get(uri, headers=headers)
 
@@ -48,11 +44,7 @@ def updateCloudflareDnsRecord(zone_id, record_id, record_type, record_name, reco
 
     uri = 'https://api.cloudflare.com/client/v4/zones/'+zone_id+'/dns_records/'+record_id
 
-    headers = {
-        'X-Auth-Email': CLOUDFLARE_EMAIL,
-        'X-Auth-Key': CLOUDFLARE_GLOBAL_API_KEY,
-        'Content-Type': 'application/json',
-    }
+    headers = getCloudflareApiHeaders()
 
     data = '{"type":"'+record_type+'","name":"'+record_name+'","content":"'+record_value+'","ttl":60,"proxied":false}'
     
@@ -66,11 +58,7 @@ def getCloudflareZoneId():
 
     uri = 'https://api.cloudflare.com/client/v4/zones'
 
-    headers = {
-        'X-Auth-Email': CLOUDFLARE_EMAIL,
-        'X-Auth-Key': CLOUDFLARE_GLOBAL_API_KEY,
-        'Content-Type': 'application/json',
-    }
+    headers = getCloudflareApiHeaders()
 
     response = requests.get(uri, headers=headers)
     
@@ -82,12 +70,25 @@ def getCloudflareDnsRecordId(zone_id):
 
     uri = 'https://api.cloudflare.com/client/v4/zones/'+zone_id+'/dns_records'
 
-    headers = {
-        'X-Auth-Email': CLOUDFLARE_EMAIL,
-        'X-Auth-Key': CLOUDFLARE_GLOBAL_API_KEY,
-        'Content-Type': 'application/json',
-    }
+    headers = getCloudflareApiHeaders()
 
     response = requests.get(uri, headers=headers)
 
     return apiInterpretation(response)
+
+# API認証用ヘッダ
+def getCloudflareApiHeaders():
+    if(CLOUDFLARE_AUTH_MODE == 'token'):
+        headers = {
+            'Authorization': 'Bearer ' + CLOUDFLARE_TOKEN,
+            'Content-Type': 'application/json',
+        }
+    elif(CLOUDFLARE_AUTH_MODE == 'account'):
+        headers = {
+            'X-Auth-Email': CLOUDFLARE_EMAIL,
+            'X-Auth-Key': CLOUDFLARE_GLOBAL_API_KEY,
+            'Content-Type': 'application/json',
+        }
+    
+    return headers
+    
