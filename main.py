@@ -2,16 +2,17 @@ import time
 
 import cloudflare
 import interface
+import http
 from log import logger
 
 from config import CLOUDFLARE_RECORD_ID, CLOUDFLARE_RECORD_NAME, CLOUDFLARE_ZONE_ID, PRIMARY_HOST_ADDRESS, LOOP_INTERVAL, ONLINE_CHECK_ADDRESS, USE_PRIORITY, PRIORITY_FILE_PATH
 
 # グローバル変数
-hostAddress = ''
+secondaryHostAddress = ''
 dnsAddress = ''
 
 def main():
-    global hostAddress, dnsAddress
+    global secondaryHostAddress, dnsAddress
     logger('Main start.')
 
     # DNSアドレスの取得
@@ -20,15 +21,15 @@ def main():
 
     # ループ
     while(True):
+        # セカンダリアドレスを取得
+        secondaryHostAddress = interface.getGlobalAddress()
         # プライマリがオフライン かつ セカンダリがオンライン 又は セカンダリ優先 のとき
-        if((interface.checkOnline(PRIMARY_HOST_ADDRESS) != 0 and interface.checkOnline(ONLINE_CHECK_ADDRESS) == 0) or prioritySecondary()):
+        if((http.repeatCheckOnline(PRIMARY_HOST_ADDRESS) == False and http.repeatCheckOnline(secondaryHostAddress) == True) or prioritySecondary()):
             # Secondary up.
-            # セカンダリアドレスを取得
-            hostAddress = interface.getGlobalAddress()
             # DNSレコードのアドレスがセカンダリホストのアドレス"でない"か確認
-            if(hostAddress != dnsAddress):
+            if(secondaryHostAddress != dnsAddress):
                 logger('Switch to this secondary.')
-                dnsAddress = hostAddress
+                dnsAddress = secondaryHostAddress
                 updateAddress()
         else:
             # Primary up.
@@ -74,7 +75,6 @@ def prioritySecondary():
                 return True
             return False
     return False
-    
 
 # mainを実行
 main()

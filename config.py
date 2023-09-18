@@ -27,6 +27,7 @@ HTTP_CHECK_HOST_NAME = config['checkHost']['name']
 HTTP_CHECK_HOST_PORT = config['checkHost']['port']
 HTTP_CHECK_HOST_URI = config['checkHost']['uri']
 HTTP_CHECK_HOST_TIMEOUT = config['checkHost']['timeout']
+HTTP_CHECK_HOST_RETRY = config['checkHost']['retry']
 
 USE_PRIORITY = config['usePriority']
 PRIORITY_FILE_PATH = config['priorityFilePath']

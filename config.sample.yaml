@@ -15,9 +15,10 @@ globalAddressCheck: "https://checkip.amazonaws.com" #このホストのIPv4ア�
 onlineCheckAddress: "1.1.1.1" #インターネット接続の確認先
 checkHost: #httpでアクセスしてオンラインかどうかを確認
   name: "example.com"
-  port: "443"
+  port: 443
   uri: "https://example.com/ping"
-  timeout: "5"
+  timeout: 5
+  retry: 2
 usePriority: false #セカンダリ優先などを使用するか
 priorityFilePath: "priority" #セカンダリを優先する場合、ファイルにSECONDARYと記述
 logPath: "/var/log/backupv4dnsupdater" #ログの保存先
