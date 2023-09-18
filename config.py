@@ -22,6 +22,12 @@ LOOP_INTERVAL = config['loopInterval']
 PRIMARY_HOST_ADDRESS = config['primaryHostAddress']
 GLOBAL_ADDRESS_CHECK = config['globalAddressCheck']
 ONLINE_CHECK_ADDRESS = config['onlineCheckAddress']
+
+HTTP_CHECK_HOST_NAME = config['checkHost']['name']
+HTTP_CHECK_HOST_PORT = config['checkHost']['port']
+HTTP_CHECK_HOST_URI = config['checkHost']['uri']
+HTTP_CHECK_HOST_TIMEOUT = config['checkHost']['timeout']
+
 USE_PRIORITY = config['usePriority']
 PRIORITY_FILE_PATH = config['priorityFilePath']
 LOG_PATH = config['logPath']
