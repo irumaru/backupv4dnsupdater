@@ -1,9 +1,9 @@
 概要
-PrimaryHostAddressのpingが応答しなくなったら、セカンダリホスト(このホスト)のグローバルIPv4アドレスを取得して、CloudflareのDNSレコードを更新
-PrimaryHostAddressのpingが応答したら、PrimaryHostAddressにCloudflareのDNSレコードを更新
+PrimaryHostAddressからテストサイトへアクセスできなくなり、このプログラムが実行されてる動的アドレスからアクセスできるときに、
+DNSレコードをアクセスできるアドレスに更新する。
 
 利用シーン
-メインのアドレスは、v6ぷラス固定でサブをPPPoE動的などにする場合
+メインのアドレスはv6プラス固定で、サブアドレスをPPPoE動的などにする場合
 
 使い方
 このプロジェクトを/usr/local/backupv4dnsupdaterにclone
