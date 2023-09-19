@@ -13,3 +13,12 @@ def logger(message):
     # ファイルに出力
     with open(LOG_PATH, 'a') as p:
         print(message, file=p)
+
+class WiseLogger:
+    def __init__(self):
+        self.mes = ''
+    
+    def print(self, p):
+        if p != self.mes:
+            logger(p)
+            self.mes = p
