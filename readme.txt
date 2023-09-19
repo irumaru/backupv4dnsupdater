@@ -16,6 +16,7 @@ systemctl enable backupv4dnsupdaterを実行
 ubuntu22
 python3
 iputils-ping
+curl
 
 補助ツール
 dnsexploar.pyでゾーンIDやレコードIDを調べる
