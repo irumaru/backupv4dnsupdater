@@ -12,7 +12,7 @@ cp ../src/config.sample.yaml ../release/dist
 
 # Create priority file.
 touch ../release/dist/priority
-echo "PRIMARY" > ../release/dist/priority
+echo "AUTO" > ../release/dist/priority
 
 # Update owner.
 chown -R 1000:1000 ../release
