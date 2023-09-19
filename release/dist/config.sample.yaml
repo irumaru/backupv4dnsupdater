@@ -1,0 +1,25 @@
+version: 0.9
+cloudflare: #CloudflareAPIの資格情報
+  auth:
+    mode: "token" #tokenまたはaccount
+    email: "" #accountの場合必須
+    appKey: "" #accountの場合必須
+    token: "" #tokenの場合必須
+  record: #更新するDNSレコードの設定
+    zoneId: ""
+    recordId: ""
+    name: ""
+loopInterval: 10 #秒ごとにアドレス更新を確認
+primaryHostAddress: "" #プライマリホストのグローバルIPv4アドレス
+secondaryHostAddress: "" #セカンダリホストのグローバルIPv4アドレス, "dynamic"でこのホストのIPを取得
+globalAddressCheck: "https://checkip.amazonaws.com" #このホストのIPv4アドレスの取得先
+onlineCheckAddress: "1.1.1.1" #インターネット接続の確認先
+checkHost: #httpでアクセスしてオンラインかどうかを確認
+  name: "example.com"
+  port: 443
+  uri: "https://example.com/ping"
+  timeout: 5
+  retry: 2
+usePriority: false #セカンダリ優先などを使用するか
+priorityFilePath: "priority" #セカンダリを優先する場合、ファイルにSECONDARYと記述
+logPath: "/var/log/backupv4dnsupdater" #ログの保存先
