@@ -3,11 +3,11 @@ Description = backupv4dnsupdater
 After=network.target nss-lookup.target
 
 [Service]
-WorkingDirectory = /usr/local/backupv4dnsupdater
-ExecStart = python3 /usr/local/backupv4dnsupdater/main.py
+WorkingDirectory = /usr/local/bv4du
+ExecStart = python3 /usr/local/bv4du/main
 Restart = always
 Type = simple
-StandardError = append:/var/log/backupv4dnsupdater
+StandardError = append:/var/log/bv4du
 
 [Install]
 WantedBy = multi-user.target
