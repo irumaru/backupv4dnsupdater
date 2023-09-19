@@ -29,7 +29,7 @@ def main():
     # ループ
     while(True):
         # セカンダリアドレスを取得
-        if SECONDARY_HOST_ADDRESS == 'dyncmic':
+        if SECONDARY_HOST_ADDRESS == 'dynamic':
             secondaryHostAddress = interface.getGlobalAddress()
         else:
             secondaryHostAddress = SECONDARY_HOST_ADDRESS
