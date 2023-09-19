@@ -2,7 +2,7 @@ import time
 
 import cloudflare
 import interface
-import http
+import httpCheck
 from log import logger
 
 from config import CLOUDFLARE_RECORD_ID, CLOUDFLARE_RECORD_NAME, CLOUDFLARE_ZONE_ID, PRIMARY_HOST_ADDRESS, SECONDARY_HOST_ADDRESS, LOOP_INTERVAL, ONLINE_CHECK_ADDRESS, USE_PRIORITY, PRIORITY_FILE_PATH
