@@ -1,0 +1,10 @@
+version: "3"
+services:
+  dev:
+    build:
+      context: ../
+    image: python:3.11
+    volumes:
+    - ../src:/usr/src/src
+    working_dir: /usr/src/src
+    command: sleep infinity
