@@ -20,6 +20,7 @@ CLOUDFLARE_RECORD_NAME = config['cloudflare']['record']['name']
 
 LOOP_INTERVAL = config['loopInterval']
 PRIMARY_HOST_ADDRESS = config['primaryHostAddress']
+SECONDARY_HOST_ADDRESS = config['secondaryHostAddress']
 GLOBAL_ADDRESS_CHECK = config['globalAddressCheck']
 ONLINE_CHECK_ADDRESS = config['onlineCheckAddress']
 

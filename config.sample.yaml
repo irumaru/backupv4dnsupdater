@@ -11,6 +11,7 @@ cloudflare: #CloudflareAPIの資格情報
     name: ""
 loopInterval: 10 #秒ごとにアドレス更新を確認
 primaryHostAddress: "" #プライマリホストのグローバルIPv4アドレス
+secondaryHostAddress: "" #セカンダリホストのグローバルIPv4アドレス, "dynamic"でこのホストのIPを取得
 globalAddressCheck: "https://checkip.amazonaws.com" #このホストのIPv4アドレスの取得先
 onlineCheckAddress: "1.1.1.1" #インターネット接続の確認先
 checkHost: #httpでアクセスしてオンラインかどうかを確認

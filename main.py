@@ -5,7 +5,7 @@ import interface
 import http
 from log import logger
 
-from config import CLOUDFLARE_RECORD_ID, CLOUDFLARE_RECORD_NAME, CLOUDFLARE_ZONE_ID, PRIMARY_HOST_ADDRESS, LOOP_INTERVAL, ONLINE_CHECK_ADDRESS, USE_PRIORITY, PRIORITY_FILE_PATH
+from config import CLOUDFLARE_RECORD_ID, CLOUDFLARE_RECORD_NAME, CLOUDFLARE_ZONE_ID, PRIMARY_HOST_ADDRESS, SECONDARY_HOST_ADDRESS, LOOP_INTERVAL, ONLINE_CHECK_ADDRESS, USE_PRIORITY, PRIORITY_FILE_PATH
 
 # グローバル変数
 secondaryHostAddress = ''
@@ -22,7 +22,10 @@ def main():
     # ループ
     while(True):
         # セカンダリアドレスを取得
-        secondaryHostAddress = interface.getGlobalAddress()
+        if SECONDARY_HOST_ADDRESS == 'dyncmic':
+            secondaryHostAddress = interface.getGlobalAddress()
+        else:
+            secondaryHostAddress = SECONDARY_HOST_ADDRESS
         # プライマリがオフライン かつ セカンダリがオンライン 又は セカンダリ優先 のとき
         if((http.repeatCheckOnline(PRIMARY_HOST_ADDRESS) == False and http.repeatCheckOnline(secondaryHostAddress) == True) or prioritySecondary()):
             # Secondary up.
