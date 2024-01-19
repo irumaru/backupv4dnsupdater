@@ -16,8 +16,10 @@ globalAddressCheck: "https://checkip.amazonaws.com" #このホストのIPv4ア�
 onlineCheckAddress: "1.1.1.1" #インターネット接続の確認先
 checkHost: #httpでアクセスしてオンラインかどうかを確認
   name: "example.com"
-  port: 443
-  uri: "https://example.com/ping"
+  port: 80
+  uri: "http://example.com/ping"
+  portHttps: 443
+  uriHttps: "https://example.com/ping"
   timeout: 5
   retry: 2
 usePriority: false #セカンダリ優先などを使用するか

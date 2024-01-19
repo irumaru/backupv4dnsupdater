@@ -27,6 +27,8 @@ ONLINE_CHECK_ADDRESS = config['onlineCheckAddress']
 HTTP_CHECK_HOST_NAME = config['checkHost']['name']
 HTTP_CHECK_HOST_PORT = config['checkHost']['port']
 HTTP_CHECK_HOST_URI = config['checkHost']['uri']
+HTTP_CHECK_HOST_HTTPS_PORT = config['checkHost']['portHttps']
+HTTP_CHECK_HOST_HTTPS_URI = config['checkHost']['uriHttps']
 HTTP_CHECK_HOST_TIMEOUT = config['checkHost']['timeout']
 HTTP_CHECK_HOST_RETRY = config['checkHost']['retry']
 

@@ -18,7 +18,7 @@ def checkOnline(hostIP):
 
 # 成功時return 0
 def checkOnlineHttps(hostIP):
-    cmd = ["curl", "-k", "--max-time", str(HTTP_CHECK_HOST_TIMEOUT), "--resolve", HTTP_CHECK_HOST_NAME +":"+ str(HTTP_CHECK_HOST_PORT) +":"+ hostIP, HTTP_CHECK_HOST_URI]
+    cmd = ["curl", "-k", "--max-time", str(HTTP_CHECK_HOST_TIMEOUT), "--resolve", HTTP_CHECK_HOST_NAME +":"+ str(HTTP_CHECK_HOST_HTTPS_PORT) +":"+ hostIP, HTTP_CHECK_HOST_HTTPS_URI]
     result = subprocess.run(cmd, capture_output=True, text=True)
     code = result.returncode
 
