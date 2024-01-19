@@ -109,8 +109,8 @@ def updateAddress():
 # セカンダリを優先するかどうか
 def priority(p):
     if(USE_PRIORITY):
-        with open(PRIORITY_FILE_PATH, mode='r') as p:
-            priority = p.read().replace('\n', '')
+        with open(PRIORITY_FILE_PATH, mode='r') as fp:
+            priority = fp.read().replace('\n', '')
             if(priority == p):
                 logger(p + ' has priority')
                 return True
